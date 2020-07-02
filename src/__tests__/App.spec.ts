@@ -234,13 +234,9 @@ describe('App', () => {
         ],
       });
 
-    let foundProduct = await productsRepository.findOne(product.body.id);
+    let foundProduct = await productsRepository.findOne(product.body.id) as Product;
 
-    expect(foundProduct).toEqual(
-      expect.objectContaining({
-        quantity: 45,
-      }),
-    );
+    expect(Number(foundProduct.quantity)).toEqual(45);
 
     await request(app)
       .post('/orders')
@@ -254,13 +250,8 @@ describe('App', () => {
         ],
       });
 
-    foundProduct = await productsRepository.findOne(product.body.id);
-
-    expect(foundProduct).toEqual(
-      expect.objectContaining({
-        quantity: 40,
-      }),
-    );
+    foundProduct = await productsRepository.findOne(product.body.id) as Product;
+    expect(Number(foundProduct.quantity)).toEqual(40);
   });
 
   it('should be able to list one specific order', async () => {
