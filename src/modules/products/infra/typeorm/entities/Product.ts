@@ -20,7 +20,7 @@ class Product {
   @Column()
   price: number;
 
-  @Column()
+  @Column('integer')
   quantity: number;
 
   @OneToMany(() => OrdersProducts, order => order.product)
